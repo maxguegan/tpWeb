@@ -1,14 +1,16 @@
 
 // Implémenter ici les fonctions paint à ajouter dans chacune des classes du modèle.
 Rectangle.prototype.paint = function(ctx) {
-    //TODO Manager color
+    ctx.strokeStyle = this.color;
+    ctx.strokeWidth = this.lineWidth;
     ctx.beginPath();
-    ctx.rect(this.leftUpPointX, this.leftUpPointY, this.leftUpPointX + this.width,   this.leftUpPointY + this.height);
+    ctx.rect(this.leftUpPointX, this.leftUpPointY, this.width, this.height);
     ctx.stroke();
   };
   
   Line.prototype.paint = function(ctx) {
-    //TODO Manager color
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = this.lineWidth;
     ctx.beginPath();
     ctx.moveTo(this.startPointX, this.startPointY);
     ctx.lineTo(this.endPointX, this.endPointY);
@@ -25,3 +27,12 @@ Rectangle.prototype.paint = function(ctx) {
     });
   };
   
+
+  function updateShapeList(addedShape, shapeNumber) {
+    var shapeList = document.getElementById('shapeList');
+    var entry = document.createElement('li');
+    entry.appendChild(document.createTextNode((addedShape === editingMode.line ? 'ligne' : 'rectangle') + ' ' + shapeNumber));
+    entry.innerHTML += '<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-sign"></span></button>';
+
+    shapeList.appendChild(entry);
+  }

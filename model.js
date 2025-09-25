@@ -4,7 +4,7 @@
 
 class Drawing {
     constructor(formes){
-        this.formes = formes;
+        this.formes = formes??[];
     }
     
 

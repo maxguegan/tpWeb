@@ -12,11 +12,14 @@ function DnD(canvas, interactor) {
 	// Developper les 3 fonctions gérant les événements
 
   this.onMousedown = (evt) => {
-    interactor.onInteractionStart(this);
+
     this.pressed = true;
     startCoordinate = getMousePosition(canvas, evt);
     this.startX = startCoordinate.x;
     this.startY = startCoordinate.y;
+    this.endX = startCoordinate.x;
+    this.endY = startCoordinate.y;
+    interactor.onInteractionStart(this);
     console.log('coord départ :' + this.startX + ', ' + this.startY);
   };
   
@@ -24,10 +27,11 @@ function DnD(canvas, interactor) {
    
   this.onMouseMove = (evt) => { 
     if(!this.pressed)return;
-    interactor.onInteractionUpdate(this);
+    
     currentCoordinate = getMousePosition(canvas, evt);
     this.endX = currentCoordinate.x;
     this.endY = currentCoordinate.y; 
+    interactor.onInteractionUpdate(this);
   };
 
   this.onMouseUp = () => { 
@@ -41,6 +45,8 @@ function DnD(canvas, interactor) {
   canvas.addEventListener('mousedown', this.onMousedown, false);
   canvas.addEventListener('mousemove', this.onMouseMove, false);
   canvas.addEventListener('mouseup', this.onMouseUp, false);
+
+
 };
 
 
