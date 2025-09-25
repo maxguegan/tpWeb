@@ -28,11 +28,18 @@ Rectangle.prototype.paint = function(ctx) {
   };
   
 
-  function updateShapeList(addedShape, shapeNumber) {
+  function updateShapeList(ctx, addedShape, drawing) {
     var shapeList = document.getElementById('shapeList');
     var entry = document.createElement('li');
-    entry.appendChild(document.createTextNode((addedShape === editingMode.line ? 'ligne' : 'rectangle') + ' ' + shapeNumber));
+    entry.appendChild(document.createTextNode((addedShape === editingMode.line ? 'ligne' : 'rectangle') + ' ' + drawing.formes.length));
     entry.innerHTML += '<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-sign"></span></button>';
-
+    entry.id = 'item'+ drawing.formes.length;
+    entry.onclick = (elt)=>{
+      drawing.formes.splice(drawing.formes.length - 1,1);
+       drawing.paint(ctx)
+       entry.remove();
+    }
+    
     shapeList.appendChild(entry);
+    
   }

@@ -45,7 +45,7 @@ function Pencil(ctx, drawing, canvas) {
 	this.onInteractionEnd = (DnD) => {
 		//Pas sûr
 		drawing.formes.push(this.currentShape);
-		updateShapeList(this.currEditingMode, drawing.formes.length);
+		updateShapeList(ctx, this.currEditingMode, drawing);
 		this.currentShape = 0;
 	};
 	// Implémentez ici les 3 fonctions onInteractionStart, onInteractionUpdate et onInteractionEnd
